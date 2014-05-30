@@ -9,7 +9,7 @@ The Docker container contains sixpack and sixpack-web server environment.
 
 ## Running
 
-An example of running sixpack is:
+Another example of running sixpack is:
 
     docker run -d -t --name sixpack-server \
                 -p 5000:5000 \

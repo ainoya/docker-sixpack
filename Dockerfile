@@ -9,7 +9,7 @@ RUN curl -O http://rpms.famillecollet.com/RPM-GPG-KEY-remi; rpm --import RPM-GPG
 RUN rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm
 RUN yum -y update
 RUN yum -y upgrade
-RUN yum -y install python-setuptools python-devel git gcc supervisor
+RUN yum -y install python-setuptools python-devel git gcc java-1.7.0-openjdk
 RUN easy_install pip pyyaml
 
 # setup redis
@@ -29,15 +29,14 @@ RUN \
 
 ADD template/redis.conf /etc/redis/6379.conf
 
-# run redis-server
-RUN service redis start
-
 # setup supervisord
 
+RUN pip install supervisor
 RUN mkdir -p /etc/supervisord.d/
-ADD template/supervisord.conf /etc/supservisord.conf
-ADD template/supervisord.d/sixpack-web.ini /etc/supservisord.d/sixpack-web.ini
-ADD template/supervisord.d/sixpack.ini /etc/supservisord.d/sixpack.ini
+RUN mkdir -p /var/log/supervisor
+ADD template/supervisord.conf /etc/supervisord.conf
+ADD template/supervisord.d/sixpack-web.ini /etc/supervisord.d/sixpack-web.ini
+ADD template/supervisord.d/sixpack.ini /etc/supervisord.d/sixpack.ini
 
 # setup sixpack
 
@@ -48,4 +47,9 @@ RUN git clone https://github.com/seatgeek/sixpack
 WORKDIR /home/sixpack/sixpack
 RUN pip install -r requirements.txt
 
+# start server
 EXPOSE 5000 5001
+
+CMD service redis start && supervisord -c /etc/supervisord.conf
+
+

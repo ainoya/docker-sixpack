@@ -3,6 +3,7 @@ FROM centos
 MAINTAINER Naoki AINOYA <ainonic@gmail.com>
 
 # setup remi repository
+RUN yum -y install wget tar
 RUN wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 RUN wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 RUN curl -O http://rpms.famillecollet.com/RPM-GPG-KEY-remi; rpm --import RPM-GPG-KEY-remi

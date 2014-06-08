@@ -2,6 +2,12 @@
 
 The Docker container contains sixpack and sixpack-web server environment.
 
+## Simple Usage
+
+If you just run sixpack with docker, you can use trusted builds registered [Docker index][di],
+
+    docker pull ainoya/sixpack
+
 ## Deploying
 
 * Run `docker build -t sixpack-server`

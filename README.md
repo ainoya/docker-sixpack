@@ -19,7 +19,12 @@ Another example of running sixpack is:
 
     docker run -d -t --name sixpack-server \
                 -p 5000:5000 \
+                -p 49022:22 \
                 -p 5001:5001 sixpack-server
+
+You can ssh to container as root, using password:`sixpack`
+
+    ssh root@localhost -p 49022 #The password is "sixpack".
 
 ## Contributing
 

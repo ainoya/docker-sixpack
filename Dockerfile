@@ -39,6 +39,15 @@ RUN \
 
 ADD template/redis.conf /etc/redis/6379.conf
 
+# setup td-agent
+
+RUN yum -y install sudo
+ADD scripts/install-redhat.sh ./install-redhat.sh
+RUN sh ./install-redhat.sh
+RUN /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-sixpack
+
+ADD template/td-agent.conf /etc/td-agent/td-agent.conf
+
 # setup supervisord
 
 RUN pip install supervisor
@@ -64,6 +73,9 @@ EXPOSE 22 5000 5001
 
 WORKDIR /home/sixpack
 CMD sh ./init_service.sh
-CMD service sshd start && service redis start && supervisord -c /etc/supervisord.conf
-
+CMD \
+    service sshd start && \
+    service redis start && \
+    service td-agent start && \
+    supervisord -c /etc/supervisord.conf
 

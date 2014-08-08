@@ -69,7 +69,7 @@ RUN pip install -r requirements.txt
 ADD scripts/init_service.sh /home/sixpack/init_service.sh
 
 # start server
-EXPOSE 22 5000 5001
+EXPOSE 22 5000 5001 24224
 
 WORKDIR /home/sixpack
 CMD sh ./init_service.sh

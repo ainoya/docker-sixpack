@@ -17,9 +17,9 @@ gpgkey=http://packages.treasuredata.com/GPG-KEY-td-agent
 EOF
 
   # update your sources
-  yes n | yum update
+  yum -y update
 
   # install the toolbelt
-  yes | yum install -y td-agent
+  yum install -y compat-libtermcap readline-devel td-agent
 
 SCRIPT

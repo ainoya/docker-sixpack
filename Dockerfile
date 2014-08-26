@@ -11,6 +11,7 @@ RUN rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm
 RUN yum -y update
 RUN yum -y upgrade
 RUN yum -y install python-setuptools python-devel git gcc java-1.7.0-openjdk
+RUN yum -y install make
 RUN easy_install pip pyyaml
 
 # setup ssh server

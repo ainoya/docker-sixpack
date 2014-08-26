@@ -11,16 +11,15 @@ sh <<SCRIPT
   cat >/etc/yum.repos.d/td.repo <<'EOF';
 [treasuredata]
 name=TreasureData
-baseurl=http://packages.treasuredata.com/redhat/\$basearch
+baseurl=http://td-agent-repository.s3-website-us-east-1.amazonaws.com/redhat/6/\$basearch
 gpgcheck=1
-gpgkey=http://packages.treasuredata.com/GPG-KEY-td-agent
+gpgkey=http://packages.treasure-data.com/redhat/RPM-GPG-KEY-td-agent
 EOF
 
   # update your sources
   yum -y update
 
   # install the toolbelt
-  yum -y install compat-libtermcap readline readline-devel
-  yum -y install td-agent
+  yum -y install td-agent2
 
 SCRIPT

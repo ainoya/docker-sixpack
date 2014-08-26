@@ -32,7 +32,7 @@ RUN wget http://download.redis.io/releases/redis-$REDIS_RELEASE.tar.gz
 RUN tar -zxf redis-$REDIS_RELEASE.tar.gz
 RUN \
     cd redis-$REDIS_RELEASE && \
-    /usr/bin/make install && \
+    make install && \
     cp utils/redis_init_script /etc/init.d/redis && \
     cd .. && \
     rm -rf redis-$REDIS_RELEASE

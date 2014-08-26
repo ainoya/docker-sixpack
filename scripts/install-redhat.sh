@@ -20,6 +20,7 @@ EOF
   yum -y update
 
   # install the toolbelt
-  yum install -y compat-libtermcap readline-devel td-agent
+  yum -y install compat-libtermcap readline readline-devel
+  yum -y install td-agent
 
 SCRIPT

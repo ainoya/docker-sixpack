@@ -14,13 +14,6 @@ RUN yum -y install python-setuptools python-devel git gcc java-1.7.0-openjdk
 RUN yum -y install make
 RUN easy_install pip pyyaml
 
-# setup ssh server
-
-RUN yum -y install -y openssh-server
-RUN mkdir /var/run/sshd
-RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-RUN sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
-RUN sed -ri 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 RUN echo 'root:sixpack' | chpasswd
 
 # setup redis
@@ -70,13 +63,7 @@ RUN pip install -r requirements.txt
 ADD scripts/init_service.sh /home/sixpack/init_service.sh
 
 # start server
-EXPOSE 22 5000 5001 24224
+EXPOSE 5000 5001 24224
 
 WORKDIR /home/sixpack
 CMD sh ./init_service.sh
-CMD \
-    service sshd start && \
-    service redis start && \
-    service td-agent start && \
-    supervisord -c /etc/supervisord.conf
-

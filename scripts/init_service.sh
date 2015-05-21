@@ -1,7 +1,6 @@
 #!/bin/sh
 
-service sshd start
-
-service redis start
+/etc/init.d/redis start
+/etc/init.d/td-agent start
 
 supervisord -c /etc/supervisord.conf
